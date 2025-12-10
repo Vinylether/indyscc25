@@ -1,0 +1,40 @@
+#%Module1.0
+##
+
+## Required internal variables
+#
+# the environment variable SWROOT should point to your main software
+# installation directory
+
+set             name            xerces-c
+set             version         3.3.0
+set             root            $::env(SWROOT)/${name}/${version}
+
+## List conflicting modules here
+
+conflict $name
+
+## List prerequisite modules here
+
+# prereq
+
+set _module_name  [module-info name]
+set is_module_rm  [module-info mode remove]
+set sys        [uname sysname]
+set os         [uname release]
+
+if { [module-info mode load] && ![is-loaded $_module_name] } {
+   puts stderr "loading $_module_name"
+} elseif { [module-info mode remove] } {
+   puts stderr "unloading $_module_name"
+}
+
+
+
+## Software-specific settings exported to user environment
+
+setenv         XERCES_C_DIR       $root
+setenv         XERCES_C_ROOT      $root
+prepend-path   CPATH              ${root}/include
+prepend-path   CMAKE_PREFIX_PATH  $root
+prepend-path   LD_LIBRARY_PATH    ${root}/lib
