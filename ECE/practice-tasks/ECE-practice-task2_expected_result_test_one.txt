@@ -1,0 +1,177 @@
+[ICL:methane build]$ ./tests/testing_climate_emulator --latitude 120 --NB 1440 --N 14400 --gpus 1 --verbose 2 --mesh_file ~/data/
+Process grid set to 1 X 1
+#XXXXX the matrix size (M) is not set! Automatically set to N.
+#XXXXX the matrix size (K) is not set! Automatically set to N.
+Max rank has not been specified. Forced to half of the size of a tile 720
+Set band_size_dense_sp = band_size_dense
+Set band_size_dense_hp = band_size_dense
+Tile size is very important to performance, especially for Low-rank. Make sure to tune the tile size for performance!!!
+1795: Band distribution is different from band dense
+1810: Set band_size_dense_dp, band_size_dense_sp, band_size_dense, and band_size_low_rank_dp to NT
+1849: flops in not gathered on GPU
+band_size_dense= 10 or band_size_dist= -1 is bigger than P= 1 so set distribution to 2DBCDD instead of band distribution by -d 0
+i@00000 Dev GPU    cuda(0) : NVIDIA A100-PCIE-40GB 39GB [pci af:0.0]
+	Frequency (GHz)    : 1.41	[SM: 108 | Capabilities: 8.0 | Concurency yes | ComputeMode 0]
+	Peak Tflop/s       : fp64: 9.746    fp32: 19.492   fp16: 77.967   tf32: 155.935 
+	Peak Mem Bw (GB/s) : 1555.20	[Clock Rate (Ghz) 1.21 | Bus Width (bits) 5120]	Reserved Pool (GB): 37.0
+i@00000 Dev 0    cpu-cores : Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz
+	Frequency (GHz)    : 2.30	[Cores: 36 | SIMD: avx512f]	PaRSEC EU: 36 threads
+	Peak Tflop/s       : fp64: 2.650    fp32: 5.299   
+#+++++ cores detected       : 36
+#+++++ nodes x cores + gpu  : 1 x 36 + 1 (36+1)
+#+++++ P x Q                : 1 x 1 (1/1)
+#+++++ M x N                : 14400 x 14400
+#+++++ MB x NB              : 1440 x 1440
+#+++++ HMB x HNB            : 300 x 300
+GPU MEMORY: FREE 2.090205 GB ; TOTAL 42.409001 GB
+
+Device 0: NVIDIA A100-PCIE-40GB
+Compute capability: 8.0
+Update nb_gpus from input 1 to real 1
+Set lookahead to 1 = 1 X 1
+[   0] TIME(s)      0.03624 : PaRSEC initialized
+
+M=14400 N=14400 NB=1440 NB=1440 HNB=300 HNB=300
+nodes=1 P=1 Q=1 cores=36 nb_gpus= 1 gpu_type= 2 verbose= 2
+kind_of_problem=2 st-2d-sqexp
+fixedacc=1.0e-08 add_diag=0 fixed_rk=0 wave_k=50
+send_full_tile=0 lookahead= 1 adaptive_decision= 0 adaptive_memory= 0
+band_size_dist= 0 band_size_dense_dp:10 band_size_dense_sp:10 band_size_dense_hp: 10 band_size_dense: 10 band_size_low_rank_dp:10 NT= 10 band_p= 1
+band_size_auto_tuning_termination= 0.666667 band_size_dense_gpu_memory_max= 10 exe_file_path= 
+max_rank=720 gen=720 comp=720
+auto_band=0 sparse=0 kind_of_cholesky=1 tensor_gemm=11 datatype_convert=0 left_looking=0
+time_slots=1 sigma=1.000000 beta=0.100000 nu=0.500000 beta_time=1.000000 nu_time=0.500000 nonsep_param=0.500000 noise= 0.100000
+numobj/L= 0 gpu_rows= 1 gpu_cols= 1
+
+Matrix is dense (band_size_dense >= NT) and auto_band is disabled, so memory is allocated continuously using dcAd instead
+2094: Dense diagonal, U, V, rank Matrices are allocated
+
+decisions: DENSE_DP= 1 DENSE_SP= 2 LOW_RANK_DP= 3 LOW_RANK_SP= 4 DENSE_HP= 5 DENSE_FP8= 6
+ 1 
+ 1  1 
+ 1  1  1 
+ 1  1  1  1 
+ 1  1  1  1  1 
+ 1  1  1  1  1  1 
+ 1  1  1  1  1  1  1 
+ 1  1  1  1  1  1  1  1 
+ 1  1  1  1  1  1  1  1  1 
+ 1  1  1  1  1  1  1  1  1  1 
+
+[****] TIME(s)      2.25436 : hicma_parsec_init
+L= 120 time_slot= 1
+Reading f_data
+Reading /home/qcao3/data//720_era_data_sample.csv
+climate_emulator_read_csv_double2complex_timeslot k 0 n 0
+Reading Et1
+Reading /home/qcao3/data//720_Et1.csv
+Reading Et2
+Reading /home/qcao3/data//720_Et2.csv
+Reading Ep
+Reading /home/qcao3/data//720_Ep.csv
+Reading Slmn
+Reading /home/qcao3/data//720_Slmn.csv
+Reading Ie
+Reading /home/qcao3/data//720_Ie.csv
+Reading Io
+Reading /home/qcao3/data//720_Io.csv
+Reading P
+Reading /home/qcao3/data//720_P.csv
+Reading D
+Reading /home/qcao3/data//720_D.csv
+Reading flmERA
+Reading (null)
+filename is NULL
+Reading /home/qcao3/data//720_flmERA.csv
+climate_emulator_read_csv_double_timeslot k 0 n 0
+
+CLIMATE_EMULATOR Parameters:
+L 120 T 1 NB 1440 gpus 1 nodes 1 time_slot_per_file 1 num_file 1 file_per_node 1
+f_data_M 121 f_data_N 240 Et1_M 239 Et1_N 121 Et2_M 239 Et2_N 119 Ep_M 240 Ep_N 239
+Slmn_M 7260 Slmn_N 120 Ie_M 120 Ie_N 239 Io_M 120 Io_N 239 P_M 119 P_N 121
+D_M 239 D_N 239 flm_M 120 flm_N 120 Zlm_M 0 Zlm_N 0 SC_M -498349952 SC_N 32583
+f_spatial_M 943267883 f_spatial_N 908996031 flmT_M 14400 flmT_N 1 flmT_numNB 10 flops_forward 9.808685e+08 flops_backward 0.000000e+00
+
+[****] TIME(s)      0.25081 : climate_emulator_reading_data: M 14400 N 14400 K 1440
+[****] TIME(s)      0.36751 : geqsht_forward_pre_computed_version: 2.67 Gflop/s
+Redistribute desc_flmT -> desc_A
+norm_flmT 0.008312 norm_A 0.008312
+[****] TIME(s)      0.00217 : geqsht_forward_reshape
+[****] TIME(s)      0.00000 : Matrix memory allocate
+[****] TIME(s)      0.06517 : SYRK M 14400 N 14400 K 1440
+[****] TIME(s)      0.00982 : Matrix norm: norm_global= 4.896321e-05
+[****] TIME(s)      0.00036 : Gather rank after matrix compression	min= 2147483647 max= 0 avg= 0.000000
+[****] TIME(s)      0.00000 : Band_size auto-tuning	band_size_dense= 10 band_size_dist= 0 band_size_auto_tuning_termination= 0.666667
+[****] TIME(s)      0.00000 : Memory for matrix allocatiion	actual= 1.544952 GB maxrank= 1.544952 GB
+[****] TIME(s)      0.00000 : Matrix analysis	sparse= 0 band_size_dist= 0 WORKLOAD_BALANCE= 1
+nb_dense_dp= 55 nb_dense_sp= 0 nb_dense_hp= 0 nb_dense_fp8= 0 nb_low_rank_dp= 0 nb_low_rank_sp= 0
+
+decisions: DENSE_DP= 1 DENSE_SP= 2 LOW_RANK_DP= 3 LOW_RANK_SP= 4 DENSE_HP= 5 DENSE_FP8= 6
+ 1 
+ 1  1 
+ 1  1  1 
+ 1  1  1  1 
+ 1  1  1  1  1 
+ 1  1  1  1  1  1 
+ 1  1  1  1  1  1  1 
+ 1  1  1  1  1  1  1  1 
+ 1  1  1  1  1  1  1  1  1 
+ 1  1  1  1  1  1  1  1  1  1 
+
+
+decisions_send: DENSE_DP= 1 DENSE_SP= 2 LOW_RANK_DP= 3 LOW_RANK_SP= 4 DENSE_HP= 5 DENSE_FP8= 6
+ 1 
+ 1  1 
+ 1  1  1 
+ 1  1  1  1 
+ 1  1  1  1  1 
+ 1  1  1  1  1  1 
+ 1  1  1  1  1  1  1 
+ 1  1  1  1  1  1  1  1 
+ 1  1  1  1  1  1  1  1  1 
+ 1  1  1  1  1  1  1  1  1  1 
+
+decisions_gemm_gpu mask (Hex):
+MASK_FP64= 0x1 MASK_FP32= 0x2 MASK_TF32= 0x4
+MASK_TF16_A16_B16_C32_OP32= 0x8 MASK_TF16_A16_B16_C16_OP32= 0x80
+MASK_TF16_A16_B16_C16_OP16= 0x10 MASK_BF16_A16_B16_C32_OP32= 0x20
+MASK_BF16_A16_B16_C16_OP16= 0x40
+11 
+11 11 
+11 11 11 
+11 11 11 11 
+11 11 11 11 11 
+11 11 11 11 11 11 
+11 11 11 11 11 11 11 
+11 11 11 11 11 11 11 11 
+11 11 11 11 11 11 11 11 11 
+11 11 11 11 11 11 11 11 11 11 
+
+[****] TIME(s)      6.00272 : Decision update: 0
+[****] TIME(s)      0.00056 : Convert D2S
+[****] TIME(s)      0.00000 : Warmup
+DENSE_MP_GPU Start
+In potrf, k 0, 0.00 % is finished; time: 0.078593 of estimated total 0.078593
+In potrf, k 9, 90.00 % is finished; time: 0.460702 of estimated total 0.460702
+[****] TIME(s)      0.48961 : hicma_parsec_cholesky	band_size_dense= 10 band_size_dist= 0 lookahead= 1 kind_of_problem= 2 HNB= 300 PxQ=   1 1   nb_gpus= 1 NB= 1440 N=   14400 kind_of_cholesky= 5 sparse= 0 left_looking= 0 nb_dense_dp= 55 nb_dense_sp= 0 nb_dense_hp= 0 nb_dense_fp8= 0 nb_low_rank_dp= 0 nb_low_rank_sp= 0:    2033.144271 gflops
+-- Factorization is suspicious (info = 1) ! 
+[****] TIME(s)      0.00060 : Convert S2D
+[****] TIME(s)      0.00045 : Gather rank after Cholesky	min= 2147483647 max= 0 avg= 0.000000
+[****] TIME(s)      0.00002 : Operation_counts : total= 0.000000e+00 op_band= 0.000000e+00 op_offband= 0.000000e+00 ratio_band= -nan op_critical_path= 0.000000e+00 op_off_critical_path= 0.000000e+00 ratio_critical_path= -nan Total_critical_path_time 0.148324, potrf 0.051638, trsm 0.090810, syrk 0.005876
+N= 14400 NB= 1440 D= 2 input_accuracy= 1.000000e-08 result_accuracy= -2.297926e-09 log_det_dp= -1.2658920536808821e-16 log_det_mp= 0.0000000000000000e+00 |log_det_dp-log_det_mp|/|log_det_dp|= 1.000000e+00 ||A-A'||= 0.000000e+00 <= tol*||A||= 4.896321e-13
+
+R-LO 14400 14400 1440 1440   300 300   1 1 1 36 10 0   2 st-2d-sqexp 1.0e-08 0 0 50   0 10 0 1 0 0  720 720 720   0.000049 4467498667361517147 4444134217059745301 4284538283182210388   0 1.000000 1.000000 1.000000  0.000000 -4769807151808365079   0 2147483647 0   0 0 0   0 2147483647 0   0 2147483647 0   0 0 0   0 2147483647 0   1.544952 1.544952   0.148324 0.051638 0.090810 0.005876    0.000000 0.489602 0.000003 0.000001 0.000000 0.000000    0.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00 -nan -nan 5  1 10 10 10 11 0 0.666667    10 10 10    55 0 0 0 0 0   5 0 0 0    1 1.000000 0.100000 0.500000 1.000000 0.500000 0.500000 0.100000    -2.297926e-09 0 2 0.000000e+00 4.896321e-13 -1.265892e-16 0.000000e+00 0.000000 2.950348 0.065169 0  1031454314 1027784120 -1121075673 -4.26167e-12 0  GITHASH:N/A    "./tests/testing_climate_emulator --latitude 120 --NB 1440 --N 14400 --gpus 1 --verbose 2 --mesh_file /home/qcao3/data/ "
++---------------------------------------------------------------------------------------------------------------------------------------------+
+|         |                    |                       Data In                              |                    Data Out                     |
+|Rank   0 |  # KERNEL |    %   |  Required  |    Transfered H2D(%)  |    Transfered D2D(%)  |  Required  |      Transfered(%)  |   Evictions  |
+|---------|-----------|--------|------------|-----------------------|-----------------------|------------|---------------------|--------------|
+|  Dev  0 |       507 |  64.75 |     0.00 B |       0.00 B(   nan)  |       0.00 B(   nan)  |     0.00 B |     0.00 B(   nan)  |           0  | cpu-cores
+|  Dev  1 |       276 |  35.25 |     9.36GB |     887.68MB(  9.26)  |       0.00 B(  0.00)  |     3.40GB |   870.23MB( 25.00)  |           0  | cuda(0)
+|---------|-----------|--------|------------|-----------------------|-----------------------|------------|---------------------|--------------|
+|All Devs |       783 | 100.00 |     9.36GB |     887.68MB(  9.26)  |       0.00 B(  0.00)  |     3.40GB |   870.23MB( 25.00)  |           0  |
++---------------------------------------------------------------------------------------------------------------------------------------------+
+
+Full transfer matrix:
+dst\src          0          1 
+   0        -        870.23MB
+   1      887.68MB     -     
